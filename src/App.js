@@ -26,7 +26,10 @@ function App() {
   ];
   return (
     <div className="App">
-      <ExpenseNewItem product={expenses}/>
+      <ExpenseNewItem product={expenses[0]}/>
+      <ExpenseNewItem product={expenses[1]}/>
+      <ExpenseNewItem product={expenses[2]}/>
+      <ExpenseNewItem product={expenses[3]}/>
     </div>
   );
 }
