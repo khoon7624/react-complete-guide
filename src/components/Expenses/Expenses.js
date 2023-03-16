@@ -9,6 +9,22 @@ const Expenses = (props) => {
   const filterChangeHandler = (slectedYear) => {
     setFilteredYear(slectedYear);
   };
+  const filteredExpense = props.items.filter((el) => {
+    return el.date.getFullYear().toString() === filteredYear;
+  });
+
+  let expenseContent = <p>표시할 내용이 없습니다.</p>;
+
+  if (filteredExpense.length > 0) {
+    expenseContent = filteredExpense.map((expense) => (
+      <ExpenseItem
+        key={expense.id}
+        title={expense.title}
+        amount={expense.amount.toLocaleString()}
+        date={expense.date}
+      />
+    ));
+  }
 
   return (
     <div>
@@ -17,26 +33,7 @@ const Expenses = (props) => {
           selected={filteredYear}
           onChangeFilter={filterChangeHandler}
         />
-        <ExpenseItem
-          title={props.items[0].title}
-          amount={props.items[0].amount.toLocaleString()}
-          date={props.items[0].date}
-        />
-        <ExpenseItem
-          title={props.items[1].title}
-          amount={props.items[1].amount.toLocaleString()}
-          date={props.items[1].date}
-        />
-        <ExpenseItem
-          title={props.items[2].title}
-          amount={props.items[2].amount.toLocaleString()}
-          date={props.items[2].date}
-        />
-        <ExpenseItem
-          title={props.items[3].title}
-          amount={props.items[3].amount.toLocaleString()}
-          date={props.items[3].date}
-        />
+        {expenseContent}
       </Card>
     </div>
   );
